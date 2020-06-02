@@ -161,14 +161,14 @@ class HashTable:
 
         Implement this.
         """
-        # index = self.hash_index(key)
-        # ll = self.storage[index]
-        # current = ll.head
-        # while current is not None:
-        #     if current.value.key == key:
-        #         return current.value.value
-        #     current = current.next
-        # return None
+        index = self.hash_index(key)
+        ll = self.storage[index]
+        current = ll.head
+        while current is not None:
+            if current.value.key == key:
+                return current.value.value
+            current = current.next
+        return None
 
     def resize(self, new_capacity):
         """
