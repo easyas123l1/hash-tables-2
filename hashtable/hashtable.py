@@ -24,7 +24,8 @@ class HashTable:
     def __init__(self, capacity):
         if capacity < 8:
             capacity = 8
-        self.capacity = [None] * capacity
+        self.capacity = capacity
+        self.data = [None] * capacity
 
     def get_num_slots(self):
         """
@@ -37,7 +38,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return len(self.capacity)
+        return len(self.data)
 
     def get_load_factor(self):
         """
@@ -53,7 +54,6 @@ class HashTable:
 
         Implement this, and/or DJB2.
         """
-
         # Your code here
 
     def djb2(self, key):
@@ -63,6 +63,10 @@ class HashTable:
         Implement this, and/or FNV-1.
         """
         # Your code here
+        hash = 5381
+        for x in key:
+            hash = ((hash << 5) + hash) + ord(x)
+        return hash
 
     def hash_index(self, key):
         """
