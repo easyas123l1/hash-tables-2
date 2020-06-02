@@ -1,3 +1,49 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def __str__(self):
+        r = ""
+        cur = self.head
+        while cur is not None:
+            r += f'({cur.value})'
+            if cur.next is not None:
+                r += ' -> '
+            cur = cur.next
+        return r
+
+    def insert_at_head(self, node):
+        node.next = self.head
+        self.head = node
+
+    def find(self, value):
+        current = self.head
+        while current is not None:
+            if current.value == value:
+                return current
+            current = current.next
+        return None
+
+    def delete(self, value):
+        current = self.head
+        if current.value == value:
+            self.head = current.next
+            return current
+        while current.next is not None:
+            if current.next == value:
+                temp = current.next
+                current.next = current.next.next
+                return temp
+            current = current.next
+        return None
+
+
 class HashTableEntry:
     """
     Linked List hash table key/value pair
@@ -22,10 +68,9 @@ class HashTable:
     """
 
     def __init__(self, capacity):
-        if capacity < 8:
-            capacity = 8
-        self.capacity = capacity
-        self.data = [None] * capacity
+        self.capacity = capacity if capacity > 7 else 8
+        self.storage = [None] * capacity
+        self.items = 0
 
     def get_num_slots(self):
         """
@@ -38,7 +83,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return len(self.data)
+        return len(self.storage)
 
     def get_load_factor(self):
         """
