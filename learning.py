@@ -8,7 +8,7 @@ class HashTableEntry:
         self.value = value
 
 
-​
+class HashTable:
 
 
 def __repr__(self):
