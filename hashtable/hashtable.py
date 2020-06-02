@@ -137,21 +137,21 @@ class HashTable:
         Implement this.
         """
         # so first find index in storage *the hash*
-        # index = self.hash_index(key)
-        # # we will need to search thru the LL to find a node
-        # ll = self.storage[index]
-        # # set current to head node
-        # current = ll.head
-        # # while current exist
-        # while current is not None:
-        #     # if current nodes value (memory of hashtableentry)
-        #     if current.value.key == key:
-        #         # return the delete node
-        #         return ll.delete(current.value)
-        #     # increment current
-        #     current = current.next
-        # # return key not found aka None
-        # return None
+        index = self.hash_index(key)
+        # we will need to search thru the LL to find a node
+        ll = self.storage[index]
+        # set current to head node
+        current = ll.head
+        # while current exist
+        while current is not None:
+            # if current nodes value (memory of hashtableentry)
+            if current.value.key == key:
+                # return the delete node
+                return ll.delete(current.value)
+            # increment current
+            current = current.next
+        # return key not found aka None
+        return None
 
     def get(self, key):
         """
