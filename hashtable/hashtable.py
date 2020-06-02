@@ -82,7 +82,6 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
         return len(self.storage)
 
     def get_load_factor(self):
@@ -91,15 +90,6 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
-    def fnv1(self, key):
-        """
-        FNV-1 Hash, 64-bit
-
-        Implement this, and/or DJB2.
-        """
-        # Your code here
 
     def djb2(self, key):
         """
@@ -118,7 +108,6 @@ class HashTable:
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        # return self.fnv1(key) % self.capacity
         return self.djb2(key) % self.capacity
 
     def put(self, key, value):
@@ -129,7 +118,15 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        # get index of where to store
+        index = self.hash_index(key)
+        # check if index has been set to a LL if not set it to a LL
+        if self.storage[index] is None:
+            self.storage[index] = LinkedList()
+        # increment count
+        self.items += 1
+        # on the linked list insert at head a new node hashtableentry
+        self.storage[index].insert_at_head(Node(HashTableEntry(key, value)))
 
     def delete(self, key):
         """
@@ -139,7 +136,22 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        # so first find index in storage *the hash*
+        # index = self.hash_index(key)
+        # # we will need to search thru the LL to find a node
+        # ll = self.storage[index]
+        # # set current to head node
+        # current = ll.head
+        # # while current exist
+        # while current is not None:
+        #     # if current nodes value (memory of hashtableentry)
+        #     if current.value.key == key:
+        #         # return the delete node
+        #         return ll.delete(current.value)
+        #     # increment current
+        #     current = current.next
+        # # return key not found aka None
+        # return None
 
     def get(self, key):
         """
@@ -149,7 +161,14 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+        # index = self.hash_index(key)
+        # ll = self.storage[index]
+        # current = ll.head
+        # while current is not None:
+        #     if current.value.key == key:
+        #         return current.value.value
+        #     current = current.next
+        # return None
 
     def resize(self, new_capacity):
         """
