@@ -1,4 +1,6 @@
 # Your code here
+import math
+import random
 
 
 def slowfun_too_slow(x, y):
@@ -9,6 +11,10 @@ def slowfun_too_slow(x, y):
 
     return v
 
+
+cache = {}
+
+
 def slowfun(x, y):
     """
     Rewrite slowfun_too_slow() in here so that the program produces the same
@@ -16,10 +22,15 @@ def slowfun(x, y):
     """
     # Your code here
 
+    tuple = (x, y)
+    if tuple in cache:
+        return cache[tuple]
+    else:
+        cache[tuple] = slowfun_too_slow(x, y)
+        return cache[tuple]
 
 
 # Do not modify below this line!
-
 for i in range(50000):
     x = random.randrange(2, 14)
     y = random.randrange(3, 6)
