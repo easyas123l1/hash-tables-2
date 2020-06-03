@@ -90,6 +90,7 @@ class HashTable:
 
         Implement this.
         """
+        return self.items / self.capacity
 
     def djb2(self, key):
         """
@@ -118,6 +119,8 @@ class HashTable:
 
         Implement this.
         """
+        if self.get_load_factor() > 0.7:
+            self.resize(self.capacity*2)
         # get index of where to store
         index = self.hash_index(key)
         # check if index has been set to a LL if not set it to a LL
@@ -136,6 +139,8 @@ class HashTable:
 
         Implement this.
         """
+        if self.get_load_factor() < 0.2 and self.capacity > 8:
+            self.resize(self.capacity // 2)
         # so first find index in storage *the hash*
         index = self.hash_index(key)
         # we will need to search thru the LL to find a node
@@ -147,6 +152,7 @@ class HashTable:
             # if current nodes value (memory of hashtableentry)
             if current.value.key == key:
                 # return the delete node
+                self.items -= 1
                 return ll.delete(current.value)
             # increment current
             current = current.next
@@ -161,6 +167,7 @@ class HashTable:
 
         Implement this.
         """
+        # pretty much same thing as delete...
         index = self.hash_index(key)
         ll = self.storage[index]
         current = ll.head
@@ -177,7 +184,16 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
+
+        self.capacity = new_capacity
+        oldStorage = self.storage
+        self.storage = [None] * new_capacity
+        for x in oldStorage:
+            if x is not None:
+                current = x.head
+                while current is not None:
+                    self.put(current.value.key, current.value.value)
+                    current = current.next
 
 
 if __name__ == "__main__":
