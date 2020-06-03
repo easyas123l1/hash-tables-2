@@ -170,6 +170,8 @@ class HashTable:
         # pretty much same thing as delete...
         index = self.hash_index(key)
         ll = self.storage[index]
+        if ll is None:
+            return None
         current = ll.head
         while current is not None:
             if current.value.key == key:
