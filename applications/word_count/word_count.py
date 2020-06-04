@@ -1,7 +1,4 @@
-
-
 def word_count(s):
-
     cache = {}
     invalid = ['"', ':', ';', ',', '.', '-', '+', '=', '/', '\\',
                '|', '[', ']', '{', '}', '(', ')', '*', '^', '&']
@@ -9,11 +6,11 @@ def word_count(s):
         s = s.replace(x, '')
     s = s.lower()
     s = s.split()
-    for letter in s:
-        if letter in cache:
-            cache[letter] += 1
+    for word in s:
+        if word in cache:
+            cache[word] += 1
         else:
-            cache[letter] = 1
+            cache[word] = 1
     return cache
 
 
